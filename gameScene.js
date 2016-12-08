@@ -20,24 +20,9 @@ var levelRate = 1.0;
 var ambient = new THREE.AmbientLight(0xffffff, 0.1);
 var light = new THREE.SpotLight(0xffffff, 1);
 
-
-// THREE.ImageUtils.crossOrigin = 'anonymous'
-// var texture = THREE.ImageUtils.loadTexture("assets/playGround.png");
-var loader = new THREE.TextureLoader();
-loader.setCrossOrigin('anonymous');
-var texture = loader.load("assets/playGround.png",
-    function (texture) {
-    },
-    // Function called when download progresses
-    function (xhr) {
-    },
-    // Function called when download errors
-    function (xhr) {
-    }
-);
+var texture = new THREE.TextureLoader().load("assets/playGround.png");
 texture.wrapS = THREE.RepeatWrapping;
 texture.wrapT = THREE.RepeatWrapping;
-texture.repeat.set(1, 1);
 
 var matFloor = new THREE.MeshPhongMaterial({map: texture});
 var geoFloor = new THREE.BoxGeometry(60, 1, 80);
@@ -169,9 +154,9 @@ function resetFrog() {
 
 var truckSize = [8, 3, 3.5];
 var carSize = [6, 2, 3.5];
-var cadillac = loader.load("assets/cadillac.jpg");
-var audi = loader.load("assets/audi.jpg");
-var cool = loader.load("assets/cool.jpg");
+var cadillac = new THREE.TextureLoader().load("assets/cadillac.jpg");
+var audi = new THREE.TextureLoader().load("assets/audi.jpg");
+var cool = new THREE.TextureLoader().load("assets/cool.jpg");
 var carTexture = [cadillac, audi, cool];
 var cars = [];
 var carNum = [3, 2, 3, 1];
@@ -225,7 +210,9 @@ function animateCars() {
     collision();
 }
 
-var logTexture = loader.load("assets/log.png");
+var logTexture = new THREE.TextureLoader().load("assets/log.png");
+logTexture.wrapS = THREE.ClampToEdgeWrapping;
+logTexture.wrapT = THREE.ClampToEdgeWrapping;
 var logPos = [
     [[-20, 0.5, -28], [0, 0.5, -28], [19, 0.51, -28]],
     [[-14, 0.5, -20], [13, 0.5, -20]],
@@ -382,6 +369,3 @@ function animate() {
 initScene();
 playBackgroundMusic();
 render();
-
-
-
