@@ -20,7 +20,9 @@ var levelRate = 1.0;
 var ambient = new THREE.AmbientLight(0xffffff, 0.1);
 var light = new THREE.SpotLight(0xffffff, 1);
 
-var texture = new THREE.TextureLoader().load("assets/playGround.png");
+var loader = new THREE.TextureLoader();
+loader.setCrossOrigin('anonymous');
+var texture = loader.load("assets/playGround.png");
 texture.wrapS = THREE.RepeatWrapping;
 texture.wrapT = THREE.RepeatWrapping;
 
@@ -59,7 +61,7 @@ function initScene() {
     addCars();
     addLogs();
     // scene.add(lightHelper);
-    scene.add(new THREE.AxisHelper(10));
+    // scene.add(new THREE.AxisHelper(10));
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     enableControl();
@@ -76,6 +78,16 @@ function enableControl() {
     controls.update();
     window.addEventListener('resize', onResize, false);
 
+    $(document).on('click', '#mute', function () {
+        var text = $(this).text();
+        if (text == 'mute') {
+            bgm.pause();
+            $(this).text('unmute');
+        } else {
+            bgm.play();
+            $(this).text('mute');
+        }
+    });
     $(document).keydown(function (e) {
         if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 39 || e.keyCode == 40) {
             e.preventDefault();
@@ -154,9 +166,9 @@ function resetFrog() {
 
 var truckSize = [8, 3, 3.5];
 var carSize = [6, 2, 3.5];
-var cadillac = new THREE.TextureLoader().load("assets/cadillac.jpg");
-var audi = new THREE.TextureLoader().load("assets/audi.jpg");
-var cool = new THREE.TextureLoader().load("assets/cool.jpg");
+var cadillac = loader.load("assets/cadillac.jpg");
+var audi = loader.load("assets/audi.jpg");
+var cool = loader.load("assets/cool.jpg");
 var carTexture = [cadillac, audi, cool];
 var cars = [];
 var carNum = [3, 2, 3, 1];
@@ -210,7 +222,7 @@ function animateCars() {
     collision();
 }
 
-var logTexture = new THREE.TextureLoader().load("assets/log.png");
+var logTexture = loader.load("assets/log.png");
 logTexture.wrapS = THREE.ClampToEdgeWrapping;
 logTexture.wrapT = THREE.ClampToEdgeWrapping;
 var logPos = [
@@ -311,13 +323,12 @@ function drop() {
         livesObj.text(lives);
     }
 }
-
+var bgm;
 function playBackgroundMusic() {
-    var bgm = document.createElement('audio');
+    bgm = document.createElement('audio');
     bgm.setAttribute('src', 'audio/background.mp3');
     bgm.setAttribute('loop', 'true');
-    // bgm.play();
-    // bgm.pause();
+    bgm.play();
 }
 
 function play(name) {
@@ -329,16 +340,15 @@ function play(name) {
 function render() {
     requestAnimFrame(render);
     if (lives == 0) {
-        if (confirm('Game Over, Your Final Score is ' + score + '. Try Again?')) {
-            passNum = 0;
-            level = 1;
-            lives = 5;
-            score = 0;
-            passObj.text(passNum);
-            levelObj.text(level);
-            livesObj.text(lives);
-            scoreObj.text(score);
-        }
+        alert('Game Over, Your Final Score is ' + score + '.');
+        passNum = 0;
+        level = 1;
+        lives = 5;
+        score = 0;
+        passObj.text(passNum);
+        levelObj.text(level);
+        livesObj.text(lives);
+        scoreObj.text(score);
     }
     animate();
     renderer.render(scene, camera);
@@ -346,7 +356,6 @@ function render() {
 
 function win() {
     ++passNum;
-    passObj.text();
     if (passNum == 5) {
         ++level;
         levelRate += level * 0.1;
@@ -369,3 +378,6 @@ function animate() {
 initScene();
 playBackgroundMusic();
 render();
+
+
+
