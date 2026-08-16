@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300" role="img" aria-label="Instacart">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0aad0a"/>
+      <stop offset="1" stop-color="#087c08"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="300" fill="url(#bg)"/>
+  <!-- decorative soft circles -->
+  <circle cx="410" cy="60" r="120" fill="#ffffff" opacity="0.06"/>
+  <circle cx="70" cy="250" r="90" fill="#ffffff" opacity="0.06"/>
+  <!-- carrot -->
+  <g transform="translate(240 105)">
+    <!-- leaves -->
+    <path d="M0 -30 C -6 -50 -22 -56 -34 -50 C -24 -40 -12 -34 -2 -30 Z" fill="#7bd44f"/>
+    <path d="M2 -30 C 8 -54 26 -60 40 -52 C 28 -40 14 -33 4 -30 Z" fill="#5cbf3a"/>
+    <path d="M0 -32 C 0 -58 6 -74 2 -92 C -6 -74 -8 -56 -6 -32 Z" fill="#69c93f"/>
+    <!-- body -->
+    <path d="M-16 -26 C 6 -34 26 -20 30 8 C 34 38 6 66 -14 60 C -34 54 -40 22 -34 -2 C -31 -14 -26 -22 -16 -26 Z" fill="#ff7009"/>
+    <path d="M-10 -20 C -20 -6 -22 20 -14 44" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.35"/>
+  </g>
+  <!-- wordmark -->
+  <text x="240" y="215" font-family="'Space Grotesk', 'Inter', Arial, sans-serif" font-size="46" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="-1">Instacart</text>
+</svg>
